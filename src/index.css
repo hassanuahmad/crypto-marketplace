@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	@apply font-poppins font-bold
+@layer components {
+	.title1-text {
+		@apply font-poppins font-bold text-h1FontSize;
+	}
+	.title2-text {
+		@apply font-poppins font-bold text-h2FontSize;
+	}
+	.title3-text {
+		@apply font-poppins font-bold text-2xl;
+	}
+	.subtitle-text {
+		@apply font-poppins font-medium text-2xl;
+	}
+	.subtitle-regular-text {
+		@apply font-poppins font-normal text-2xl;
+	}
+	.body-text {
+		@apply font-poppins font-normal text-base;
+	}
+	.boldBody-text {
+		@apply font-poppins font-bold text-base;
+	}
+	.small-text {
+		@apply font-poppins font-normal text-xs;
+	}
+	.primary-button {
+		@apply px-8 py-2 rounded-lg bg-cmp-primary boldBody-text font-medium text-white shadow-xl;
+	}
 }

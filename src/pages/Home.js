@@ -1,8 +1,9 @@
-const Home = ({ children }) => {
+import HeroSection from "../components/HeroSection";
+
+const Home = () => {
 	return (
 		<div>
-			<p>joe</p>
-			{children}
+			<HeroSection />
 		</div>
 	);
 };
