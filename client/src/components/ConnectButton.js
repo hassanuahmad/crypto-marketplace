@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import WalletContext from "../contexts/WalletContext";
 
@@ -12,8 +12,9 @@ async function getAccount() {
 	return account;
 }
 
-const ConnectButton = ({className="", onClick=()=>{}}) => {
+const ConnectButton = ({ className = "", onClick = () => {} }) => {
 	const { accountAddress, setAccountAddress } = useContext(WalletContext);
+	const { setIsWalletConnected } = useContext(WalletContext);
 
 	const formatMobileWalletAddress = () => {
 		return `${accountAddress.substring(0, 7)}...${accountAddress.substring(
@@ -29,6 +30,7 @@ const ConnectButton = ({className="", onClick=()=>{}}) => {
 		) {
 			getAccount().then((response) => {
 				setAccountAddress(response);
+				setIsWalletConnected(true);
 			});
 		} else {
 			console.log("error");

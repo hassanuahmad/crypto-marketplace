@@ -15,12 +15,11 @@ const StartSellingSection = () => {
 	];
 
 	const sellingInfoPadding = (index) => {
-		console.log(index);
-		if (index === sellingInfo.length-1) {
+		if (index === sellingInfo.length - 1) {
 			return 0;
 		}
 		return 14;
-	}
+	};
 
 	return (
 		<div className="pb-16">
@@ -29,7 +28,9 @@ const StartSellingSection = () => {
 				{sellingInfo.map((info, index) => (
 					<div
 						key={index}
-						className={`flex items-center pb-14 max-w-xs lg:pr-${sellingInfoPadding(index)}`}
+						className={`flex items-center pb-14 max-w-xs lg:pr-${sellingInfoPadding(
+							index
+						)}`}
 					>
 						<p className="pr-4 text-9xl font-bold outline-text text-white">
 							{index + 1}
