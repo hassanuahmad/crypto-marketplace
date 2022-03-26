@@ -49,10 +49,12 @@ app.get("/user/:id", (req, resp) => {
 // GET ALL ADS
 app.get("/ad", (req, resp) => {
 	db.query("SELECT * FROM ad", (error, results, fields) => {
+		console.log(error);
 		if (error || !results || results.length === 0) {
 			resp.sendStatus(404);
 			return;
 		}
+		console.log(results);
 		resp.send(results);
 	});
 });
