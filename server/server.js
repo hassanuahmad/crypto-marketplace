@@ -8,13 +8,15 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-// DATABASE SETUP
-const db = mysql.createConnection({
+const config = {
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DATABASE,
-});
+};
+console.log(config);
+// DATABASE SETUP
+const db = mysql.createConnection(config);
 
 db.connect((err) => {
 	if (err) {
@@ -43,7 +45,7 @@ app.get("/user/:id", (req, resp) => {
 });
 
 // GET ALL ADS
-app.get("/ad/", (req, resp) => {
+app.get("/ad", (req, resp) => {
 	db.query("SELECT * FROM ad", (error, results, fields) => {
 		if (error || !results || results.length === 0) {
 			resp.sendStatus(404);
