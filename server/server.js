@@ -14,6 +14,7 @@ const config = {
 	password: process.env.DB_PASSWORD,
 	database: process.env.DATABASE,
 };
+
 console.log(config);
 // DATABASE SETUP
 const db = mysql.createConnection(config);
