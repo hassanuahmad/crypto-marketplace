@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ethers } from "ethers";
 
 const Logo = () => {
 	return (
@@ -15,6 +16,49 @@ const Logo = () => {
 
 const Navbar = () => {
 	const [hamburgerOpen, setHamburgerOpen] = useState(false);
+	const [errorMessage, setErrorMessage] = useState(null);
+	const [defaultAccount, setDefaultAccount] = useState(null);
+	const [userBalance, setUserBalance] = useState(null);
+	const [connButtonText, setConnButtonText] = useState("Connect Wallet");
+
+	const connectWalletHandler = () => {
+		if (window.ethereum && window.ethereum.isMetaMask) {
+			console.log("MetaMask Here!");
+
+			window.ethereum
+				.request({ method: "eth_requestAccounts" })
+				.then((result) => {
+					accountChangedHandler(result[0]);
+					setConnButtonText(defaultAccount);
+					getAccountBalance(result[0]);
+				})
+				.catch((error) => {
+					setErrorMessage(error.message);
+				});
+		} else {
+			console.log("Need to install MetaMask");
+			setErrorMessage(
+				"Please install MetaMask browser extension to interact"
+			);
+		}
+	};
+
+	// update account, will cause component re-render
+	const accountChangedHandler = (newAccount) => {
+		setDefaultAccount(newAccount);
+		getAccountBalance(newAccount.toString());
+	};
+
+	const getAccountBalance = (account) => {
+		window.ethereum
+			.request({ method: "eth_getBalance", params: [account, "latest"] })
+			.then((balance) => {
+				setUserBalance(ethers.utils.formatEther(balance));
+			})
+			.catch((error) => {
+				setErrorMessage(error.message);
+			});
+	};
 
 	const navElements = [
 		{
@@ -30,6 +74,7 @@ const Navbar = () => {
 			to: "/sell",
 		},
 	];
+
 	return (
 		<>
 			<div className="w-full block shadow-md">
@@ -55,8 +100,8 @@ const Navbar = () => {
 					<div className="flex hidden md:inline">
 						<Button
 							outline
-							text="Connect Wallet"
-							onClick={() => {}}
+							text={connButtonText}
+							onClick={connectWalletHandler}
 						/>
 					</div>
 					<div className="block md:hidden right-0 pr-4">
@@ -84,7 +129,11 @@ const Navbar = () => {
 							</Link>
 						);
 					})}
-					<Button outline className="mb-4 mt-2 hover:bg-cmp-black" text="Connect Wallet" onClick={() => {}} />
+					<Button
+						outline
+						text={connButtonText}
+						onClick={connectWalletHandler}
+					/>
 				</div>
 			)}
 		</>
