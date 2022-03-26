@@ -4,7 +4,7 @@
 
 @layer components {
 	.title1-text {
-		@apply font-poppins font-bold text-h1FontSize;
+		@apply font-poppins font-bold text-h1FontSize leading-none;
 	}
 	.title2-text {
 		@apply font-poppins font-bold text-h2FontSize;
@@ -16,7 +16,7 @@
 		@apply font-poppins font-medium text-2xl;
 	}
 	.subtitle-regular-text {
-		@apply font-poppins font-normal text-2xl;
+		@apply font-poppins font-normal text-2xl leading-9;
 	}
 	.body-text {
 		@apply font-poppins font-normal text-base;

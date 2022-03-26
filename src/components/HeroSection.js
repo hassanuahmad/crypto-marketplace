@@ -2,19 +2,19 @@ import heroPic from "../assets/images/heroPic.png";
 
 const HeroSection = () => {
 	return (
-		<div className="flex">
-			<div>
-				<h1>
+		<div className="container mx-auto flex flex-col py-16 text-center items-center md:justify-center lg:flex-row lg:text-left lg:justify-center">
+			<div className="lg:order-2">
+				<img src={heroPic} alt="" width="400px" height="400px" />
+			</div>
+			<div className="lg:pr-16">
+				<h1 className="title2-text lg:max-w-lg pb-2">
 					The first decentralized marketplace where you can buy and
 					sell
 				</h1>
-				<p>
-					With Opensea, you can buy and sell items with cryptocurrency
+				<p className="subtitle-regular-text lg:max-w-md pb-9">
+					With CMP, you can buy and sell items with cryptocurrency
 				</p>
-				<button>Explore</button>
-			</div>
-			<div>
-				<img src={heroPic} alt="" />
+				<button className="primary-button">Explore</button>
 			</div>
 		</div>
 	);
