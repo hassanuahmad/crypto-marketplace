@@ -5,8 +5,6 @@ const mysql = require("mysql2");
 const cors = require("cors");
 require("dotenv").config();
 
-const port = process.env.HTTP_PORT;
-
 app.use(cors());
 app.use(express.json());
 
@@ -79,6 +77,7 @@ app.post("/ad/create", (req, resp) => {
 	console.log(req);
 });
 
-app.listen(process.env.HTTP_PORT || port, () => {
-	console.log(`Server is running! on ${process.env.HTTP_PORT}`);
+const port = 3001;
+app.listen(process.env.PORT || port, () => {
+	console.log(`Server is running! on ${port}`);
 });
