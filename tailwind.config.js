@@ -7,6 +7,7 @@ module.exports = {
 				"cmp-primary-dark": "#1f4d3d",
 				"cmp-black": "#04111D",
 				"cmp-light-gray": "#8C8CA1",
+				"cmp-accent": "#ECF1F4",
 			},
 			fontFamily: {
 				poppins: "'Poppins', sans-serif",

@@ -30,10 +30,22 @@ body {
 	.small-text {
 		@apply font-poppins font-normal text-xs;
 	}
+	.input-style {
+		@apply bg-cmp-accent h-14 px-8 py-4 rounded-lg;
+	}
 }
 
 .outline-text {
 	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: #3E9B7B;
+	-webkit-text-stroke-color: #3e9b7b;
 	/* line-height: 1; */
+}
+
+.form-error {
+	color: red;
+	padding-top: 0.25rem;
+}
+
+.no-style {
+	-webkit-appearance: none;
 }
