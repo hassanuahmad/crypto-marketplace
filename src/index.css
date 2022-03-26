@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+	@apply font-poppins;
+}
 @layer components {
 	.title1-text {
 		@apply font-poppins font-bold text-h1FontSize leading-none;
