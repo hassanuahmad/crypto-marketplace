@@ -18,7 +18,7 @@ const Logo = () => {
 
 const Navbar = () => {
 	const [hamburgerOpen, setHamburgerOpen] = useState(false);
-	const { isWalletConnected } = useContext(WalletContext);
+	const { isWalletConnected, disconnectAccount } = useContext(WalletContext);
 
 	const navElements = [
 		{
@@ -68,6 +68,7 @@ const Navbar = () => {
 										icon={faRightFromBracket}
 									/>
 								}
+								onClick={disconnectAccount}
 							/>
 						) : null}
 					</div>
@@ -112,6 +113,7 @@ const Navbar = () => {
 										icon={faRightFromBracket}
 									/>
 								}
+								onClick={disconnectAccount}
 							/>
 						) : null}
 					</div>

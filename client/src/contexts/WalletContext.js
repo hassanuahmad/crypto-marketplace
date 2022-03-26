@@ -5,7 +5,7 @@ const WalletContext = createContext();
 export default WalletContext;
 
 export const WalletProvider = ({ children }) => {
-	const [accountAddress, setAccountAddress] = useState("");
+	const [accountAddress, setAccountAddress] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [isWalletConnected, setIsWalletConnected] = useState(false);
 
@@ -44,6 +44,11 @@ export const WalletProvider = ({ children }) => {
 			});
 	};
 
+	const disconnectAccount = () => {
+		setAccountAddress(null);
+		setIsWalletConnected(false);
+	};
+
 	const values = {
 		accountAddress,
 		setAccountAddress,
@@ -53,6 +58,7 @@ export const WalletProvider = ({ children }) => {
 		setUserBalance,
 		connectWalletHandler,
 		formatMobileWalletAddress,
+		disconnectAccount,
 	};
 
 	return (
