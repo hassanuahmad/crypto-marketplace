@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 async function getAccount() {
 	const accounts = await window.ethereum.request({
@@ -29,7 +30,14 @@ const ConnectButton = () => {
 
 	return (
 		<Button
-			text={!!accountAddress ? accountAddress : "Connect Wallet"}
+			outline
+			text={
+				!!accountAddress ? (
+					<Link to="/profile">{accountAddress}</Link>
+				) : (
+					"Connect Wallet"
+				)
+			}
 			onClick={connectButtonOnClick}
 		/>
 	);

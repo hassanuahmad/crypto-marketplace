@@ -40,7 +40,7 @@ const Navbar = () => {
 					</div>
 
 					{/* Desktop nav items */}
-					<div className="flex hidden md:inline">
+					<div className="hidden md:inline">
 						{navElements.map((item, i) => {
 							return (
 								<Link
@@ -53,7 +53,7 @@ const Navbar = () => {
 							);
 						})}
 					</div>
-					<div className="flex hidden md:inline">
+					<div className="hidden md:inline">
 						<ConnectButton />
 					</div>
 					<div className="block md:hidden right-0 pr-4">
@@ -67,7 +67,7 @@ const Navbar = () => {
 			</div>
 			{/* mobile items */}
 			{hamburgerOpen && (
-				<div className="w-full py-2 bg-cmp-primary flex flex-col items-center md:hidden inline">
+				<div className="w-full py-2 bg-cmp-primary flex flex-col items-center md:hidden">
 					{navElements.map((item, i) => {
 						return (
 							<Link
