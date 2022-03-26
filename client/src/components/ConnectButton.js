@@ -12,7 +12,7 @@ async function getAccount() {
 	return account;
 }
 
-const ConnectButton = () => {
+const ConnectButton = ({className="", onClick=()=>{}}) => {
 	const { accountAddress, setAccountAddress } = useContext(WalletContext);
 
 	const formatMobileWalletAddress = () => {
@@ -33,6 +33,8 @@ const ConnectButton = () => {
 		} else {
 			console.log("error");
 		}
+
+		onClick();
 	};
 
 	return (
@@ -46,6 +48,7 @@ const ConnectButton = () => {
 				)
 			}
 			onClick={connectButtonOnClick}
+			className={className}
 		/>
 	);
 };

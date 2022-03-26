@@ -67,7 +67,7 @@ const Navbar = () => {
 			</div>
 			{/* mobile items */}
 			{hamburgerOpen && (
-				<div className="w-full py-2 bg-cmp-primary flex flex-col items-center md:hidden">
+				<div className="w-full pt-4 pb-8 bg-cmp-primary flex flex-col items-center md:hidden">
 					{navElements.map((item, i) => {
 						return (
 							<Link
@@ -75,13 +75,13 @@ const Navbar = () => {
 								key={i}
 								onClick={() => setHamburgerOpen(false)}
 							>
-								<li className="list-none py-4">
+								<li className="text-white hover:text-cmp-black transition-color duration-100 list-none py-4">
 									{item.display}
 								</li>
 							</Link>
 						);
 					})}
-					<ConnectButton />
+				<ConnectButton onClick={()=>{setHamburgerOpen(false)}} className="border-white hover:border-cmp-black text-white hover:text-cmp-black" />
 				</div>
 			)}
 		</>
