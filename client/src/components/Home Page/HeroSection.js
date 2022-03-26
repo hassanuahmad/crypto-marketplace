@@ -15,7 +15,7 @@ const HeroSection = () => {
 				<p className="subtitle-regular-text lg:max-w-md pb-9">
 					With CMP, you can buy and sell items with cryptocurrency
 				</p>
-				<Button text="Emplore" />
+				<Button text="Explore" />
 			</div>
 		</div>
 	);
