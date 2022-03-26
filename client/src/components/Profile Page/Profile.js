@@ -4,7 +4,7 @@ import Jazzicon from "react-jazzicon";
 import WalletContext from "../../contexts/WalletContext";
 
 const Profile = () => {
-	const { accountAddress } = useContext(WalletContext);
+	const { accountAddress, userBalance } = useContext(WalletContext);
 
 	const formatMobileWalletAddress = () => {
 		return `${accountAddress.substring(0, 7)}...${accountAddress.substring(
@@ -26,7 +26,8 @@ const Profile = () => {
 					</span>
 				</p>
 				<p className="body-text">
-					Balance: <span className="boldBody-text">${}</span>
+					Balance:{" "}
+					<span className="boldBody-text">{userBalance} ETH</span>
 				</p>
 				<div className="pt-10 flex flex-col">
 					<Button

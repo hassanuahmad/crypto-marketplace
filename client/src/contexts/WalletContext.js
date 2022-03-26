@@ -5,6 +5,7 @@ export default WalletContext;
 
 export const WalletProvider = ({ children }) => {
 	const [accountAddress, setAccountAddress] = useState("");
+	const [userBalance, setUserBalance] = useState(null);
 	const [isWalletConnected, setIsWalletConnected] = useState(false);
 
 	const values = {
@@ -12,6 +13,8 @@ export const WalletProvider = ({ children }) => {
 		setAccountAddress,
 		isWalletConnected,
 		setIsWalletConnected,
+		userBalance,
+		setUserBalance,
 	};
 
 	return (

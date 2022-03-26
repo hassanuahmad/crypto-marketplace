@@ -2,18 +2,11 @@ import Button from "./Button";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import WalletContext from "../contexts/WalletContext";
-
-async function getAccount() {
-	const accounts = await window.ethereum.request({
-		method: "eth_requestAccounts",
-	});
-	const account = accounts[0];
-
-	return account;
-}
+import { ethers } from "ethers";
 
 const ConnectButton = ({ className = "", onClick = () => {} }) => {
 	const { accountAddress, setAccountAddress } = useContext(WalletContext);
+	const { setUserBalance } = useContext(WalletContext);
 	const { setIsWalletConnected } = useContext(WalletContext);
 
 	const formatMobileWalletAddress = () => {
@@ -22,21 +15,35 @@ const ConnectButton = ({ className = "", onClick = () => {} }) => {
 		)}`;
 	};
 
-	const connectButtonOnClick = () => {
-		console.log(window);
-		if (
-			typeof window !== "undefined" &&
-			typeof window.ethereum !== "undefined"
-		) {
-			getAccount().then((response) => {
-				setAccountAddress(response);
-				setIsWalletConnected(true);
-			});
+	const connectWalletHandler = () => {
+		if (window.ethereum) {
+			window.ethereum
+				.request({ method: "eth_requestAccounts" })
+				.then((result) => {
+					accountChangeHandler(result[0]);
+				});
 		} else {
 			console.log("error");
 		}
 
 		onClick();
+	};
+
+	const accountChangeHandler = (newAccount) => {
+		setAccountAddress(newAccount);
+		setIsWalletConnected(true);
+		getAccountBalance(newAccount);
+	};
+
+	const getAccountBalance = (account) => {
+		window.ethereum
+			.request({ method: "eth_getBalance", params: [account, "latest"] })
+			.then((balance) => {
+				setUserBalance(ethers.utils.formatEther(balance));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	return (
@@ -49,7 +56,7 @@ const ConnectButton = ({ className = "", onClick = () => {} }) => {
 					"Connect Wallet"
 				)
 			}
-			onClick={connectButtonOnClick}
+			onClick={connectWalletHandler}
 			className={className}
 		/>
 	);
