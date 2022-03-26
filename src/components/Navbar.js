@@ -1,7 +1,7 @@
 import { useState } from "react";
-import logo from "../../assets/logo.png";
+import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import Button from "../Button";
+import Button from "./Button";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
