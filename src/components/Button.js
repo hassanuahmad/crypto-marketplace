@@ -2,7 +2,7 @@ const Button = ({text, onClick, className="", outline=false}) => {
 
 	const outlineClasses = () => {
 		if (outline) {
-			return "border-2 border-black text-black hover:border-cmp-primary hover:bg-cmp-primary hover:text-white";
+			return "border-2 border-cmp-black text-cmp-black hover:border-cmp-primary hover:bg-cmp-primary hover:text-white";
 		}
 		return "bg-cmp-primary";
 	}
