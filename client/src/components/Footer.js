@@ -71,6 +71,7 @@ const Footer = () => {
 							}
 							href={element.to}
 							target="_blank"
+							rel="noreferrer"
 						>
 							{element.display}
 						</a>
@@ -86,6 +87,7 @@ const Footer = () => {
 							}
 							href={element.to}
 							target="_blank"
+							rel="noreferrer"
 						>
 							{element.display}
 						</a>

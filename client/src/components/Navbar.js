@@ -1,64 +1,20 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ethers } from "ethers";
+import ConnectButton from "./ConnectButton";
 
 const Logo = () => {
 	return (
 		<Link to="/">
-			<img className="h-12 w-12" src={logo} />
+			<img className="h-12 w-12" src={logo} alt="" />
 		</Link>
 	);
 };
 
 const Navbar = () => {
 	const [hamburgerOpen, setHamburgerOpen] = useState(false);
-	const [errorMessage, setErrorMessage] = useState(null);
-	const [defaultAccount, setDefaultAccount] = useState(null);
-	const [userBalance, setUserBalance] = useState(null);
-	const [connButtonText, setConnButtonText] = useState("Connect Wallet");
-
-	const connectWalletHandler = () => {
-		if (window.ethereum && window.ethereum.isMetaMask) {
-			console.log("MetaMask Here!");
-
-			window.ethereum
-				.request({ method: "eth_requestAccounts" })
-				.then((result) => {
-					accountChangedHandler(result[0]);
-					setConnButtonText(defaultAccount);
-					getAccountBalance(result[0]);
-				})
-				.catch((error) => {
-					setErrorMessage(error.message);
-				});
-		} else {
-			console.log("Need to install MetaMask");
-			setErrorMessage(
-				"Please install MetaMask browser extension to interact"
-			);
-		}
-	};
-
-	// update account, will cause component re-render
-	const accountChangedHandler = (newAccount) => {
-		setDefaultAccount(newAccount);
-		getAccountBalance(newAccount.toString());
-	};
-
-	const getAccountBalance = (account) => {
-		window.ethereum
-			.request({ method: "eth_getBalance", params: [account, "latest"] })
-			.then((balance) => {
-				setUserBalance(ethers.utils.formatEther(balance));
-			})
-			.catch((error) => {
-				setErrorMessage(error.message);
-			});
-	};
 
 	const navElements = [
 		{
@@ -98,11 +54,7 @@ const Navbar = () => {
 						})}
 					</div>
 					<div className="flex hidden md:inline">
-						<Button
-							outline
-							text={connButtonText}
-							onClick={connectWalletHandler}
-						/>
+						<ConnectButton />
 					</div>
 					<div className="block md:hidden right-0 pr-4">
 						<FontAwesomeIcon
@@ -129,11 +81,7 @@ const Navbar = () => {
 							</Link>
 						);
 					})}
-					<Button
-						outline
-						text={connButtonText}
-						onClick={connectWalletHandler}
-					/>
+					<ConnectButton />
 				</div>
 			)}
 		</>
