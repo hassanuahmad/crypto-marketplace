@@ -22,12 +22,18 @@ body {
 		@apply font-poppins font-normal text-2xl leading-9;
 	}
 	.body-text {
-		@apply font-poppins font-normal text-base;
+		@apply font-poppins font-normal text-base leading-6;
 	}
 	.boldBody-text {
-		@apply font-poppins font-bold text-base;
+		@apply font-poppins font-bold text-base leading-6;
 	}
 	.small-text {
 		@apply font-poppins font-normal text-xs;
 	}
+}
+
+.outline-text {
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #3E9B7B;
+	/* line-height: 1; */
 }
