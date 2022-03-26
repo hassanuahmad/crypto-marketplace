@@ -1,9 +1,12 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ConnectButton from "./ConnectButton";
+import Button from "./Button";
+import { useContext } from "react";
+import WalletContext from "../contexts/WalletContext";
 
 const Logo = () => {
 	return (
@@ -15,6 +18,7 @@ const Logo = () => {
 
 const Navbar = () => {
 	const [hamburgerOpen, setHamburgerOpen] = useState(false);
+	const { isWalletConnected } = useContext(WalletContext);
 
 	const navElements = [
 		{
@@ -55,6 +59,17 @@ const Navbar = () => {
 					</div>
 					<div className="hidden md:inline">
 						<ConnectButton />
+						{isWalletConnected ? (
+							<Button
+								outline
+								className="border-red-600 hover:border-red-600 hover:bg-red-600 text-red-600 hover:text-white ml-2"
+								text={
+									<FontAwesomeIcon
+										icon={faRightFromBracket}
+									/>
+								}
+							/>
+						) : null}
 					</div>
 					<div className="block md:hidden right-0 pr-4">
 						<FontAwesomeIcon
@@ -81,7 +96,25 @@ const Navbar = () => {
 							</Link>
 						);
 					})}
-				<ConnectButton onClick={()=>{setHamburgerOpen(false)}} className="border-white hover:border-cmp-black text-white hover:text-cmp-black" />
+					<div>
+						<ConnectButton
+							onClick={() => {
+								setHamburgerOpen(false);
+							}}
+							className="border-white hover:border-cmp-black text-white hover:text-cmp-black"
+						/>
+						{isWalletConnected ? (
+							<Button
+								outline
+								className="border-red-600 hover:border-red-600 hover:bg-red-600 text-red-600 hover:text-white ml-2"
+								text={
+									<FontAwesomeIcon
+										icon={faRightFromBracket}
+									/>
+								}
+							/>
+						) : null}
+					</div>
 				</div>
 			)}
 		</>
