@@ -4,7 +4,7 @@ module.exports = {
 		extend: {
 			colors: {
 				"cmp-primary": "#3E9B7B",
-				// "cmp-primary-dark": "#3E9B7B",
+				"cmp-primary-dark": "#1f4d3d",
 				"cmp-black": "#04111D",
 				"cmp-light-gray": "#8C8CA1",
 			},

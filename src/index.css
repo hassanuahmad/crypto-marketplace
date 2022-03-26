@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
 	@apply font-poppins;
 }
@@ -30,8 +29,5 @@ body {
 	}
 	.small-text {
 		@apply font-poppins font-normal text-xs;
-	}
-	.primary-button {
-		@apply px-8 py-2 rounded-lg bg-cmp-primary boldBody-text font-medium text-white shadow-xl;
 	}
 }
