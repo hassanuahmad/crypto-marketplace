@@ -1,6 +1,7 @@
 import Button from "./Button";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import WalletContext from "../contexts/WalletContext";
 
 async function getAccount() {
 	const accounts = await window.ethereum.request({
@@ -12,7 +13,13 @@ async function getAccount() {
 }
 
 const ConnectButton = () => {
-	const [accountAddress, setAccountAddress] = useState("");
+	const { accountAddress, setAccountAddress } = useContext(WalletContext);
+
+	const formatMobileWalletAddress = () => {
+		return `${accountAddress.substring(0, 7)}...${accountAddress.substring(
+			accountAddress.length - 5
+		)}`;
+	};
 
 	const connectButtonOnClick = () => {
 		console.log(window);
@@ -33,7 +40,7 @@ const ConnectButton = () => {
 			outline
 			text={
 				!!accountAddress ? (
-					<Link to="/profile">{accountAddress}</Link>
+					<Link to="/profile">{formatMobileWalletAddress()}</Link>
 				) : (
 					"Connect Wallet"
 				)
