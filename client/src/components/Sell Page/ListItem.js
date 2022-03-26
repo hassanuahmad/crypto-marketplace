@@ -21,8 +21,8 @@ const ListItem = () => {
 	return (
 		<div className="py-16 flex flex-col items-center">
 			<p className="title3-text pb-8">List Item</p>
-			<form onSubmit={formik.handleSubmit}>
-				<div className="flex flex-col body-text w-80">
+			<form onSubmit={formik.handleSubmit} className="w-80">
+				<div className="flex flex-col body-text">
 					<label className="pb-2" htmlFor="">
 						Title
 					</label>
