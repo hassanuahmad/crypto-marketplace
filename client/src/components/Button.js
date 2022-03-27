@@ -1,4 +1,10 @@
-const Button = ({ text, onClick, className = "", outline = false }) => {
+const Button = ({
+	text,
+	onClick,
+	className = "",
+	outline = false,
+	type = "",
+}) => {
 	const outlineClasses = () => {
 		if (outline) {
 			return "px-4 py-1.5 border-2 border-cmp-black text-cmp-black hover:border-cmp-primary hover:bg-cmp-primary hover:text-white";
@@ -11,6 +17,7 @@ const Button = ({ text, onClick, className = "", outline = false }) => {
 		<button
 			className={`${className} ${classNames} ${outlineClasses()}`}
 			onClick={onClick}
+			type={type}
 		>
 			{text}
 		</button>
