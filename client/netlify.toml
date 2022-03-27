@@ -1,7 +1,7 @@
 [build]
   base = "client/"
   
-  publish = "client/build"
+  publish = "build"
 
   # Default build command.
   command = "npm run build"
