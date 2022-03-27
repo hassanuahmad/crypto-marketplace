@@ -66,7 +66,7 @@ app.get("/ad", (req, resp) => {
 // GET AD BY ID
 app.get("/ad/:id", (req, resp) => {
 	db.query(
-		`SELECT id,title,description,category,price,image FROM ad WHERE id="${req.params.id}"`,
+		`SELECT wallet_address,id,title,description,category,price,image FROM ad WHERE id="${req.params.id}"`,
 		(error, results, fields) => {
 			if (error) {
 				console.log(error);
@@ -76,22 +76,53 @@ app.get("/ad/:id", (req, resp) => {
 				resp.sendStatus(404);
 				return;
 			}
-			console.log("SINGLE AD RESULTS:", results);
 			resp.send(results[0]);
 		}
 	);
 });
 
 // CREATE AD
-app.post("/ad/create", upload.single('image'), (req, resp) => {
+app.post("/ad/create", upload.single("image"), (req, resp) => {
+	const wallet_address = req.body.wallet_address;
 	const title = req.body.title;
-	const description = req.body.title;
+	const description = req.body.description;
 	const category = req.body.category;
-	const price = req.body.title;
+	const price = req.body.price;
 	const image = req.file;
+	if (
+		!wallet_address ||
+		!title ||
+		!description ||
+		!category ||
+		!price ||
+		!image
+	) {
+		return resp.status(400).send("A field was missing!");
+	}
 
-	console.log(image);
-	resp.sendStatus(200);
+	db.query(
+		`INSERT INTO ad (id,wallet_address,title,description,category,price,image) VALUES
+	 	(REPLACE(UUID_SHORT(),'-',''),?,?,?,?,?,?)`,
+		[
+			wallet_address,
+			title,
+			description,
+			category,
+			price,
+			`uploads/${image.filename}`,
+		],
+		(error, results, fields) => {
+			if (error) {
+				return console.log(error);
+			}
+			if (error || !results || results.length === 0) {
+				resp.sendStatus(404);
+				return;
+			}
+			resp.sendStatus(200);
+			return;
+		}
+	);
 });
 
 const port = 3001;
