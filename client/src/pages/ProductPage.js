@@ -14,7 +14,6 @@ const ProductPage = () => {
 		Axios.get(`${REACT_APP_CMP_BACKEND_URL}/ad/${id}`)
 			.then((response) => {
 				setProductData(response.data);
-				console.log(response.data);
 			})
 			.catch((error) => {
 				// handle error
@@ -25,14 +24,16 @@ const ProductPage = () => {
 	return (
 		<div>
 			{productData.id ? (
-				<SingleProductPage 
-				title={productData.title}
-				description={productData.description}
-				category={productData.category}
-				price={productData.price}
+				<SingleProductPage
+					title={productData.title}
+					description={productData.description}
+					category={productData.category}
+					price={productData.price}
 				/>
 			) : (
-				<div>PRODUCT DOESN'T EXIST</div>
+				<div className="h-40 title3-text text-center py-16">
+					Product Doesn't Exist
+				</div>
 			)}
 		</div>
 	);
