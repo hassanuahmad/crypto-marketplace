@@ -10,7 +10,6 @@ const ProductPage = () => {
 	const [productData, setProductData] = useState({});
 
 	useEffect(() => {
-		console.log(`attempting to fetch ad ${id}`);
 		Axios.get(`${REACT_APP_CMP_BACKEND_URL}/ad/${id}`)
 			.then((response) => {
 				setProductData(response.data);
