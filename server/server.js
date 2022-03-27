@@ -1,8 +1,6 @@
-// npm run watch
 const express = require("express");
 const app = express();
 const mysql = require("mysql2");
-const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
@@ -33,7 +31,6 @@ app.get("/", (req, resp) => {
 
 app.get("/user/:id", (req, resp) => {
 	const q = `SELECT * FROM user WHERE wallet_address="${req.params.id}"`;
-	console.log(q);
 	db.query(q, function (error, results, fields) {
 		// error will be an Error if one occurred during the query
 		// results will contain the results of the query
@@ -49,12 +46,14 @@ app.get("/user/:id", (req, resp) => {
 // GET ALL ADS
 app.get("/ad", (req, resp) => {
 	db.query("SELECT * FROM ad", (error, results, fields) => {
-		console.log(error);
+		if (error) {
+			console.log(error);
+			return;
+		}
 		if (error || !results || results.length === 0) {
 			resp.sendStatus(404);
 			return;
 		}
-		console.log(results);
 		resp.send(results);
 	});
 });
@@ -62,26 +61,28 @@ app.get("/ad", (req, resp) => {
 // GET AD BY ID
 app.get("/ad/:id", (req, resp) => {
 	db.query(
-		`SELECT * FROM ad WHERE id=${req.params.id}`,
+		`SELECT id,title,description,category,price,image FROM ad WHERE id="${req.params.id}"`,
 		(error, results, fields) => {
+			if (error) {
+				console.log(error);
+				return;
+			}
 			if (error || !results || results.length === 0) {
 				resp.sendStatus(404);
 				return;
 			}
-			resp.send(results);
+			resp.send(results[0]);
 		}
 	);
 });
 
 // CREATE AD
 app.post("/ad/create", (req, resp) => {
-	const post_body = req.body;
-	const title = post_body.title;
-	const description = post_body.title;
-	const price = post_body.title;
-	const image = post_body.title;
+	const title = req.body.title;
+	const description = req.body.title;
+	const category = req.body.category;
+	const price = req.body.title;
 
-	console.log(req.body);
 	resp.sendStatus(200);
 });
 

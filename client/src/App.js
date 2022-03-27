@@ -19,7 +19,7 @@ function App() {
 						<Route path="/sell" element={<Sell />} />
 						<Route path="/profile" element={<ProfilePage />} />
 						<Route path="/explore" element={<Explore />} />
-						<Route path="/product" element={<ProductPage />} />
+						<Route path="/product/:id" element={<ProductPage />} />
 					</Routes>
 					<Footer />
 				</WalletProvider>
