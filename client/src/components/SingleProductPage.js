@@ -50,7 +50,7 @@ const SingleProductPage = ({
 			addr: wallet_address,
 		});
 		Axios.delete(
-			`${process.env.REACT_APP_CMP_BACKEND_URL}/add/delete/${adId}`
+			`${process.env.REACT_APP_CMP_BACKEND_URL}/ad/delete/${adId}`
 		).then(() => {
 			navigate("/");
 		});
