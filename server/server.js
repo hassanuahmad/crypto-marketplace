@@ -66,7 +66,7 @@ app.get("/ad", (req, resp) => {
 // GET AD BY ID
 app.get("/ad/:id", (req, resp) => {
 	db.query(
-		`SELECT id,title,description,category,price,image FROM ad WHERE id="${req.params.id}"`,
+		`SELECT wallet_address,id,title,description,category,price,image FROM ad WHERE id="${req.params.id}"`,
 		(error, results, fields) => {
 			if (error) {
 				console.log(error);
