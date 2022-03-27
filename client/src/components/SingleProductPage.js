@@ -1,5 +1,4 @@
 import Button from "./Button";
-import shoe from "../assets/images/shoe.png";
 import { useState } from "react";
 import { ethers } from "ethers";
 import ErrorMessage from "./CryptoPayment/ErrorMessage";
@@ -32,6 +31,7 @@ const SingleProductPage = ({
 	description,
 	category,
 	price,
+	image
 }) => {
 	const [error, setError] = useState();
 	const [txs, setTxs] = useState([]);
@@ -52,10 +52,8 @@ const SingleProductPage = ({
 			<div className="py-16 px-8 flex flex-col lg:flex-row">
 				<div className="pb-2 lg:pr-20">
 					<img
-						src={shoe}
-						className="rounded-lg"
-						height="500px"
-						width="500px"
+						src={image}
+						className="rounded-lg max-w-[500px] max-h-[500px]"
 						alt=""
 					/>
 				</div>
