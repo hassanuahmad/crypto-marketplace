@@ -1,12 +1,19 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../Button";
-// import Axios from "axios";
+import Axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import WalletContext from '../../contexts/WalletContext';
 
 const ListItem = () => {
+	const [image, setImage] = useState();
+
+	const navigate = useNavigate();
+	const {accountAddress} = useContext(WalletContext);
+
 	const formik = useFormik({
 		initialValues: {
-			image: "",
 			title: "",
 			description: "",
 			category: "",
@@ -21,11 +28,27 @@ const ListItem = () => {
 				.required("Required"),
 			price: Yup.number().required("Required"),
 		}),
+
 		onSubmit: (values) => {
-			// Axios.post("/upload", {
-			// 	image: image,
-			// }).then(() => {});
-			console.log(values);
+			const formData = new FormData();
+			formData.append("wallet_address", accountAddress);
+			formData.append("title", values.title);
+			formData.append("description", values.description);
+			formData.append("category", values.category);
+			formData.append("price", values.price);
+			formData.append("image", image);
+			Axios.post(
+				`${process.env.REACT_APP_CMP_BACKEND_URL}/ad/create`,
+				formData,
+				{ headers: { "Content-Type": "multipart/form-data" } }
+			)
+				.then(() => {
+					navigate('/');
+				})
+				.catch((err) => {
+					console.log(err.response);
+				});
+			console.log(values, image);
 		},
 	});
 
@@ -46,7 +69,9 @@ const ListItem = () => {
 						name="file"
 						type="file"
 						className="input-style"
-						onChange={formik.handleChange}
+						onChange={(event) => {
+							setImage(event.currentTarget.files[0]);
+						}}
 						value={formik.values.image}
 					/>
 				</div>
