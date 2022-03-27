@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
+const multer = require("multer");
+
 require("dotenv").config();
 
 app.use(express.json());
@@ -24,6 +26,9 @@ const db = mysql.createPool({
 	connectionLimit: 10,
 	queueLimit: 0,
 });
+
+// Image upload
+const upload = multer({ dest: "uploads/" });
 
 app.get("/", (req, resp) => {
 	resp.send("joe");
@@ -71,18 +76,21 @@ app.get("/ad/:id", (req, resp) => {
 				resp.sendStatus(404);
 				return;
 			}
+			console.log("SINGLE AD RESULTS:", results);
 			resp.send(results[0]);
 		}
 	);
 });
 
 // CREATE AD
-app.post("/ad/create", (req, resp) => {
+app.post("/ad/create", upload.single('image'), (req, resp) => {
 	const title = req.body.title;
 	const description = req.body.title;
 	const category = req.body.category;
 	const price = req.body.title;
+	const image = req.file;
 
+	console.log(image);
 	resp.sendStatus(200);
 });
 
