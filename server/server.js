@@ -49,6 +49,8 @@ app.get("/user/:id", (req, resp) => {
 	});
 });
 
+app.put("/user/update/:id", (req, resp) => {});
+
 // GET ALL ADS
 app.get("/ad", (req, resp) => {
 	db.query("SELECT * FROM ad", (error, results, fields) => {
@@ -124,6 +126,17 @@ app.post("/ad/create", upload.single("image"), (req, resp) => {
 			return;
 		}
 	);
+});
+
+app.delete("/ad/delete/:id", (req, resp) => {
+	const id = req.params.id;
+	db.query("DELETE FROM ad WHERE id = ?", id, (err, result) => {
+		if (err) {
+			console.log(err);
+			return resp.sendStatus(400);
+		}
+		return resp.send(result);
+	});
 });
 
 const port = 3001;
