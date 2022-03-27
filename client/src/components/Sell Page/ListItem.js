@@ -4,13 +4,13 @@ import Button from "../Button";
 import Axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import WalletContext from '../../contexts/WalletContext';
+import WalletContext from "../../contexts/WalletContext";
 
 const ListItem = () => {
 	const [image, setImage] = useState();
 
 	const navigate = useNavigate();
-	const {accountAddress} = useContext(WalletContext);
+	const { accountAddress } = useContext(WalletContext);
 
 	const formik = useFormik({
 		initialValues: {
@@ -43,7 +43,7 @@ const ListItem = () => {
 				{ headers: { "Content-Type": "multipart/form-data" } }
 			)
 				.then(() => {
-					navigate('/');
+					navigate("/");
 				})
 				.catch((err) => {
 					console.log(err.response);
