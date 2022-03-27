@@ -1,5 +1,6 @@
 import { useState, createContext } from "react";
 import { ethers } from "ethers";
+import Axios from "axios";
 
 const WalletContext = createContext();
 export default WalletContext;
@@ -8,6 +9,14 @@ export const WalletProvider = ({ children }) => {
 	const [accountAddress, setAccountAddress] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [isWalletConnected, setIsWalletConnected] = useState(false);
+
+	const sendWalletAddressBackend = (walletAddress) => {
+		Axios.post(`${process.env.REACT_APP_CMP_BACKEND_URL}/user/add/`, {
+			wallet_address: walletAddress,
+		}).then((response) => {
+			console.log(response);
+		});
+	};
 
 	const formatMobileWalletAddress = () => {
 		return `${accountAddress.substring(0, 7)}...${accountAddress.substring(
@@ -29,6 +38,7 @@ export const WalletProvider = ({ children }) => {
 
 	const accountChangeHandler = (newAccount) => {
 		setAccountAddress(newAccount);
+		sendWalletAddressBackend(newAccount);
 		setIsWalletConnected(true);
 		getAccountBalance(newAccount);
 	};
