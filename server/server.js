@@ -64,7 +64,8 @@ app.post("/user/add", (req, resp) => {
 	);
 });
 
-app.put("/user/update/:id", (req, resp) => {});
+app.put("/user/update/:id", (req, resp) => {
+});
 
 // GET ALL ADS
 app.get("/ad", (req, resp) => {
