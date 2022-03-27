@@ -51,6 +51,19 @@ app.get("/user/:id", (req, resp) => {
 	});
 });
 
+app.post("/user/add", (req, resp) => {
+	db.query(
+		`INSERT IGNORE INTO user (wallet_address,email) VALUES (?,?)`,
+		[req.body.wallet_address, req.body.email || ""],
+		(error, results) => {
+			if (error) {
+				return resp.status(400).send(error);
+			}
+			return resp.status(200);
+		}
+	);
+});
+
 app.put("/user/update/:id", (req, resp) => {});
 
 // GET ALL ADS
