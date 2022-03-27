@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import Axios from "axios";
 
 const Profile = () => {
-	const { accountAddress, userBalance, formatMobileWalletAddress } =
+	const { userBalance, formatMobileWalletAddress } =
 		useContext(WalletContext);
 
 	const formik = useFormik({
@@ -21,9 +21,7 @@ const Profile = () => {
 		}),
 
 		onSubmit: (values) => {
-			Axios.post("", {
-				
-			})
+			Axios.post("", {});
 			console.log(values);
 		},
 	});

@@ -10,14 +10,13 @@ const ProductPage = () => {
 	useEffect(() => {
 		Axios.get(`${process.env.REACT_APP_CMP_BACKEND_URL}/ad/${id}`)
 			.then((response) => {
-				console.log(response.data);
 				setProductData(response.data);
 			})
 			.catch((error) => {
 				// handle error
 				// console.error(error);
 			});
-	}, []);
+	}, [id]);
 
 	return (
 		<div>

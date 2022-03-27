@@ -1,6 +1,5 @@
 import Axios from "axios";
 import { useState, useEffect } from "react";
-import shoe from "../../assets/images/shoe.png";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card";
 
