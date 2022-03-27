@@ -6,7 +6,14 @@ import TxList from "./CryptoPayment/TxList";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-const startPayment = async ({ setError, setTxs, ether, addr }) => {
+const startPayment = async ({
+	setError,
+	setTxs,
+	ether,
+	addr,
+	adId,
+	navigate,
+}) => {
 	try {
 		if (!window.ethereum)
 			throw new Error("No crypto wallet found. Please install it.");
@@ -22,8 +29,14 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
 		console.log({ ether, addr });
 		console.log("tx", tx);
 		setTxs([tx]);
+
+		Axios.delete(
+			`${process.env.REACT_APP_CMP_BACKEND_URL}/ad/delete/${adId}`
+		).then(() => {
+			navigate("/");
+		});
 	} catch (err) {
-		setError(err.message);
+		setError("Insufficient funds for transaction");
 	}
 };
 
@@ -48,12 +61,11 @@ const SingleProductPage = ({
 			setTxs,
 			ether: `${price}`,
 			addr: wallet_address,
+			adId,
+			navigate,
 		});
-		Axios.delete(
-			`${process.env.REACT_APP_CMP_BACKEND_URL}/ad/delete/${adId}`
-		).then(() => {
-			navigate("/");
-		});
+
+		console.log(error);
 	};
 
 	return (
