@@ -9,22 +9,15 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-const config = {
+// DATABASE SETUP
+const db = mysql.createPool({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DATABASE,
-};
-
-console.log(config);
-// DATABASE SETUP
-const db = mysql.createConnection(config);
-
-db.connect((err) => {
-	if (err) {
-		console.error("error connecting: " + err.stack);
-		return;
-	}
+	waitForConnections: true,
+	connectionLimit: 10,
+	queueLimit: 0,
 });
 
 app.get("/", (req, resp) => {
@@ -80,7 +73,9 @@ app.post("/ad/create", (req, resp) => {
 	const description = post_body.title;
 	const price = post_body.title;
 	const image = post_body.title;
-	console.log(req);
+
+	console.log(req.body);
+	resp.sendStatus(200);
 });
 
 const port = 3001;
