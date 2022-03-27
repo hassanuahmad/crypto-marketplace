@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 
 require("dotenv").config();
+app.use(express.static("."));
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -109,7 +110,7 @@ app.post("/ad/create", upload.single("image"), (req, resp) => {
 			description,
 			category,
 			price,
-			`uploads/${image.filename}`,
+			`/uploads/${image.filename}`,
 		],
 		(error, results, fields) => {
 			if (error) {

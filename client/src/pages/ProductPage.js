@@ -28,6 +28,7 @@ const ProductPage = () => {
 					description={productData.description}
 					category={productData.category}
 					price={productData.price}
+					image={`${process.env.REACT_APP_CMP_BACKEND_URL}${productData.image}`}
 				/>
 			) : (
 				<div className="h-40 title3-text text-center py-16">

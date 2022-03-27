@@ -2,6 +2,7 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import shoe from "../../assets/images/shoe.png";
 import { Link } from "react-router-dom";
+import Card from "../../components/Card";
 
 const LatestItems = () => {
 	const [itemList, setItemList] = useState([]);
@@ -22,20 +23,11 @@ const LatestItems = () => {
 					(item, index) =>
 						index < 6 && (
 							<Link key={index} to={`/product/${item.id}`}>
-								<div className="p-4 hover:shadow-lg rounded-xl border">
-									<img
-										src={shoe}
-										className="rounded-xl pb-2 bg-contain w-60 h-60"
-										alt=""
-									/>
-									<p className="subtitle-text pb-2">
-										{item.title}
-									</p>
-									<p className="body-text">Price</p>
-									<p className="boldBody-text text-cmp-primary">
-										{item.price} ETH
-									</p>
-								</div>
+								<Card
+									title={item.title}
+									price={item.price}
+									image={`${process.env.REACT_APP_CMP_BACKEND_URL}${item.image}`}
+								/>
 							</Link>
 						)
 				)}
