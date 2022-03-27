@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import ErrorMessage from "./CryptoPayment/ErrorMessage";
 import TxList from "./CryptoPayment/TxList";
+import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 const startPayment = async ({ setError, setTxs, ether, addr }) => {
 	try {
@@ -26,15 +28,17 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
 };
 
 const SingleProductPage = ({
+	adId,
 	wallet_address,
 	title,
 	description,
 	category,
 	price,
-	image
+	image,
 }) => {
 	const [error, setError] = useState();
 	const [txs, setTxs] = useState([]);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -44,6 +48,11 @@ const SingleProductPage = ({
 			setTxs,
 			ether: `${price}`,
 			addr: wallet_address,
+		});
+		Axios.delete(
+			`${process.env.REACT_APP_CMP_BACKEND_URL}/add/delete/${adId}`
+		).then(() => {
+			navigate("/");
 		});
 	};
 

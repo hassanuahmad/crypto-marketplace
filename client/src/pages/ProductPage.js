@@ -23,6 +23,7 @@ const ProductPage = () => {
 		<div>
 			{productData.id ? (
 				<SingleProductPage
+					adId={productData.id}
 					wallet_address={productData.wallet_address}
 					title={productData.title}
 					description={productData.description}
