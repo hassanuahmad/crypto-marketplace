@@ -2,7 +2,6 @@ import Button from "./Button";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import WalletContext from "../contexts/WalletContext";
-import { ethers } from "ethers";
 
 const ConnectButton = ({ className = "", onClick = () => {} }) => {
 	const { accountAddress, connectWalletHandler, formatMobileWalletAddress } =

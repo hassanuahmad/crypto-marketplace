@@ -2,7 +2,7 @@ import shoe from "../assets/images/shoe.png";
 
 const Card = () => {
 	return (
-		<div className="p-4 hover:shadow-lg rounded-xl border">
+		<div className="p-4 hover:shadow-lg rounded-xl border w-fit">
 			<img
 				src={shoe}
 				className="rounded-xl pb-2 bg-contain w-60 h-60"
