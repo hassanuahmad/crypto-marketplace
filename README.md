@@ -1,6 +1,6 @@
 # Crypto Marketplace
 
-The first decenteralized general marketplace that uses the etherium blockchain for transactions where users can buy and sell items.
+The first decentralized general marketplace that uses the ethereum blockchain for transactions where users can buy and sell items.
 
 ## Tech Stack
 
